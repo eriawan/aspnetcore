@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components
 {
@@ -56,7 +57,7 @@ namespace Microsoft.AspNetCore.Components
         }
 
         /// <inheritdoc />
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:RequiresUnreferencedCode", Justification = "Requires a gesture that ensures components are always preserved. https://github.com/mono/linker/issues/1806")]
+        [DynamicDependency(BlazorComponent, typeof(DynamicComponent))]
         public Task SetParametersAsync(ParameterView parameters)
         {
             // This manual parameter assignment logic will be marginally faster than calling

@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components.Rendering;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Forms
 {
@@ -68,6 +70,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc />
+        [DynamicDependency(BlazorComponent, typeof(ValidationMessage<>))]
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             foreach (var message in CurrentEditContext.GetValidationMessages(_fieldIdentifier))

@@ -1280,9 +1280,6 @@ namespace Microsoft.AspNetCore.Components
         {
             private readonly static ConcurrentDictionary<Type, Delegate> _cache = new ConcurrentDictionary<Type, Delegate>();
 
-            private static MethodInfo? _formatEnumValue;
-            private static MethodInfo? _formatNullableEnumValue;
-
             public static BindFormatter<T> Get<T>()
             {
                 if (!_cache.TryGetValue(typeof(T), out var formatter))

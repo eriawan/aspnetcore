@@ -19,7 +19,6 @@ namespace Microsoft.AspNetCore.Components.LegacyRouteMatching
             new ConcurrentDictionary<Key, LegacyRouteTable>();
         public static readonly IComparer<LegacyRouteEntry> RoutePrecedence = Comparer<LegacyRouteEntry>.Create(RouteComparison);
 
-        [RequiresUnreferencedCode("This API calls Assembly.ExportedTypes. Types and members of the loaded assembly might be removed during trimming.")]
         public static LegacyRouteTable Create(IEnumerable<Assembly> assemblies)
         {
             var key = new Key(assemblies.OrderBy(a => a.FullName).ToArray());

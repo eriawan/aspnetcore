@@ -13,6 +13,7 @@ namespace Microsoft.AspNetCore.Components.Web
     {
         // This class represents the second half of parsing incoming event data,
         // once the type of the eventArgs becomes known.
+        [DynamicDependency(JsonSerialized, typeof(WebEventData))]
         public static WebEventData Parse(string eventDescriptorJson, string eventArgsJson)
         {
             WebEventDescriptor eventDescriptor;

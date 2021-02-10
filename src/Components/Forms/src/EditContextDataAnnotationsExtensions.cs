@@ -94,7 +94,6 @@ namespace Microsoft.AspNetCore.Components.Forms
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2080", Justification = "This is not a trimmer safe pattern.")]
         private static bool TryGetValidatableProperty(in FieldIdentifier fieldIdentifier, [NotNullWhen(true)] out PropertyInfo? propertyInfo)
         {
             var cacheKey = (ModelType: fieldIdentifier.Model.GetType(), fieldIdentifier.FieldName);

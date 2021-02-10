@@ -24,7 +24,6 @@ namespace Microsoft.AspNetCore.Components
             ValueSupplier = valueSupplier;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:RequiresUnreferencedCode", Justification = "Requires a gesture that ensures components are always preserved. https://github.com/mono/linker/issues/1806")]
         public static IReadOnlyList<CascadingParameterState> FindCascadingParameters(ComponentState componentState)
         {
             var componentType = componentState.Component.GetType();

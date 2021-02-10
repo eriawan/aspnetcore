@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Components.Reflection
     internal class MemberAssignment
     {
         public static IEnumerable<PropertyInfo> GetPropertiesIncludingInherited(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             BindingFlags bindingFlags)
         {
             var dictionary = new Dictionary<string, List<PropertyInfo>>();
@@ -21,14 +21,9 @@ namespace Microsoft.AspNetCore.Components.Reflection
 
             while (currentType != null)
             {
-                var properties = currentType.GetProperties(bindingFlags);
+                var properties = currentType.GetProperties(bindingFlags  | BindingFlags.DeclaredOnly);
                 foreach (var property in properties)
                 {
-                    if (property.DeclaringType != currentType)
-                    {
-                        continue;
-                    }
-
                     if (!dictionary.TryGetValue(property.Name, out var others))
                     {
                         others = new List<PropertyInfo>();

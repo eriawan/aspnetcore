@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Components.Routing;
@@ -20,7 +19,6 @@ namespace Microsoft.AspNetCore.Components
             new ConcurrentDictionary<Key, RouteTable>();
         public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(RouteComparison);
 
-        [RequiresUnreferencedCode("This API calls Assembly.ExportedTypes. Types and members of the loaded assembly might be removed during trimming.")]
         public static RouteTable Create(IEnumerable<Assembly> assemblies)
         {
             var key = new Key(assemblies.OrderBy(a => a.FullName).ToArray());
@@ -35,7 +33,6 @@ namespace Microsoft.AspNetCore.Components
             return routeTable;
         }
 
-        [RequiresUnreferencedCode("This API calls Assembly.ExportedTypes. Types and members of the loaded assembly might be removed during trimming.")]
         internal static List<Type> GetRouteableComponents(IEnumerable<Assembly> assemblies)
         {
             var routeableComponents = new List<Type>();

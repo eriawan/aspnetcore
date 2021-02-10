@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Forms
 {
@@ -72,6 +73,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc/>
+        [DynamicDependency(BlazorComponent, typeof(InputFile))]
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "input");

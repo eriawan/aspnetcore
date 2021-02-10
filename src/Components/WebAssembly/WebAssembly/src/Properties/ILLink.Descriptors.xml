@@ -1,6 +1,5 @@
 <linker>
   <assembly fullname="Microsoft.AspNetCore.Components.WebAssembly">
-    <type fullname="Microsoft.AspNetCore.Components.WebAssembly.Hosting.EntrypointInvoker" required="true" />
     <type fullname="Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods" required="true" />
   </assembly>
 </linker>

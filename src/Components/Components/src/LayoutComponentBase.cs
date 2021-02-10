@@ -1,6 +1,9 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
+
 namespace Microsoft.AspNetCore.Components
 {
     /// <summary>
@@ -10,12 +13,19 @@ namespace Microsoft.AspNetCore.Components
     /// </summary>
     public abstract class LayoutComponentBase : ComponentBase
     {
+        [DynamicDependency(BlazorComponent, typeof(LayoutView))]
+        private RenderFragment? _body;
+
         internal const string BodyPropertyName = nameof(Body);
 
         /// <summary>
         /// Gets the content to be rendered inside the layout.
         /// </summary>
         [Parameter]
-        public RenderFragment? Body { get; set; }
+        public RenderFragment? Body
+        {
+            get => _body;
+            set => _body = value;
+        }
     }
 }

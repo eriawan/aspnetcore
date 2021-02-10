@@ -27,7 +27,6 @@ namespace Microsoft.AspNetCore.Components
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "Requires a gesture that preserves Components https://github.com/mono/linker/issues/1806")]
         private static Type? ResolveType(Key key, Assembly[] assemblies)
         {
             var assembly = assemblies

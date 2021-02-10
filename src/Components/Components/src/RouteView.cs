@@ -4,9 +4,11 @@
 #nullable disable warnings
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components
 {
@@ -52,6 +54,7 @@ namespace Microsoft.AspNetCore.Components
         }
 
         /// <inheritdoc />
+        [DynamicDependency(BlazorComponent, typeof(RouteView))]
         public Task SetParametersAsync(ParameterView parameters)
         {
             parameters.SetParameterProperties(this);

@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Components
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "This pattern is not linker friendly.")]
+        [RequiresUnreferencedCode("This type attempts to load component parameters that may be linked away.")]
         private static Type? ResolveType(Key key, Assembly[] assemblies)
         {
             var assembly = assemblies

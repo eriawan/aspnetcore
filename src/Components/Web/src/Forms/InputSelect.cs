@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components.Rendering;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Forms
 {
@@ -25,6 +26,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         [DisallowNull] public ElementReference? Element { get; protected set; }
 
         /// <inheritdoc />
+        [DynamicDependency(BlazorComponent, typeof(InputSelect<>))]
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "select");

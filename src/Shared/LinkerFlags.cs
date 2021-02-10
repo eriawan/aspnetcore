@@ -11,5 +11,10 @@ namespace Microsoft.AspNetCore.Internal
         /// Flags for a member that is JSON (de)serialized.
         /// </summary>
         public const DynamicallyAccessedMemberTypes JsonSerialized = DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicProperties;
+
+        /// <summary>
+        /// Flags for a Blazor component
+        /// </summary>
+        public const DynamicallyAccessedMemberTypes BlazorComponent = DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicProperties;
     }
 }

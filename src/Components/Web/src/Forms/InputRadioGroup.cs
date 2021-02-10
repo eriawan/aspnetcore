@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components.Rendering;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Forms
 {
@@ -39,6 +40,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc />
+        [DynamicDependency(BlazorComponent, typeof(InputRadioGroup<>))]
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             Debug.Assert(_context != null);

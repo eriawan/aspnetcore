@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Components
         private static readonly BindingFlags _injectablePropertyBindingFlags
             = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
-        private readonly ConcurrentDictionary<Type, Action<IServiceProvider, IComponent>> _cachedInitializers
-            = new ConcurrentDictionary<Type, Action<IServiceProvider, IComponent>>();
+        private readonly ConcurrentDictionary<Type, Action<IServiceProvider, IComponent>> _cachedInitializers = new();
 
         private readonly IComponentActivator _componentActivator;
 
@@ -25,8 +24,7 @@ namespace Microsoft.AspNetCore.Components
             _componentActivator = componentActivator ?? throw new ArgumentNullException(nameof(componentActivator));
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072", Justification = "Requires a gesture that ensures components are always preserved. https://github.com/mono/linker/issues/1806")]
-        public IComponent InstantiateComponent(IServiceProvider serviceProvider, Type componentType)
+        public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type componentType)
         {
             var component = _componentActivator.CreateInstance(componentType);
             if (component is null)
@@ -54,8 +52,6 @@ namespace Microsoft.AspNetCore.Components
             initializer(serviceProvider, instance);
         }
 
-
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2077", Justification = "Requires a gesture that ensures components are always preserved. https://github.com/mono/linker/issues/1806")]
         private Action<IServiceProvider, IComponent> CreateInitializer(Type type)
         {
             // Do all the reflection up front

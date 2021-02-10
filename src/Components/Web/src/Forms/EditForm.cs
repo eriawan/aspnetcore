@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Forms
 {
@@ -81,6 +83,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
         /// <inheritdoc />
+        [DynamicDependency(BlazorComponent, typeof(EditForm))]
         protected override void OnParametersSet()
         {
             if (_hasSetEditContextExplicitly && Model != null)

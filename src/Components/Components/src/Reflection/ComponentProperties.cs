@@ -20,7 +20,6 @@ namespace Microsoft.AspNetCore.Components.Reflection
         private readonly static ConcurrentDictionary<Type, WritersForType> _cachedWritersByType
             = new ConcurrentDictionary<Type, WritersForType>();
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072", Justification = "Requires a gesture that ensures components are always preserved. https://github.com/mono/linker/issues/1806")]
         public static void SetProperties(in ParameterView parameters, object target)
         {
             if (target == null)

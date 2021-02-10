@@ -4,16 +4,17 @@
 #nullable disable warnings
 
 using System;
-using System.Runtime.ExceptionServices;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Components.LegacyRouteMatching;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Routing
 {
@@ -103,6 +104,7 @@ namespace Microsoft.AspNetCore.Components.Routing
         }
 
         /// <inheritdoc />
+        [DynamicDependency(BlazorComponent, typeof(Router))]
         public async Task SetParametersAsync(ParameterView parameters)
         {
             parameters.SetParameterProperties(this);
@@ -150,7 +152,6 @@ namespace Microsoft.AspNetCore.Components.Routing
                 : str.Substring(0, firstIndex);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "We need a way to ensure components are never trimmed away.")]
         private void RefreshRouteTable()
         {
             var assemblies = AdditionalAssemblies == null ? new[] { AppAssembly } : new[] { AppAssembly }.Concat(AdditionalAssemblies);

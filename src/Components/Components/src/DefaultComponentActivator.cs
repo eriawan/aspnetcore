@@ -11,16 +11,14 @@ namespace Microsoft.AspNetCore.Components
         public static IComponentActivator Instance { get; } = new DefaultComponentActivator();
 
         /// <inheritdoc />
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067", Justification = "Requires a gesture that ensures components are always preserved. https://github.com/mono/linker/issues/1806")]
-        public IComponent CreateInstance(Type componentType)
+        public IComponent CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type componentType)
         {
-            var instance = Activator.CreateInstance(componentType);
-            if (instance is not IComponent component)
+            if (!typeof(IComponent).IsAssignableFrom(componentType))
             {
                 throw new ArgumentException($"The type {componentType.FullName} does not implement {nameof(IComponent)}.", nameof(componentType));
             }
 
-            return component;
+            return (IComponent)Activator.CreateInstance(componentType)!;
         }
     }
 }
